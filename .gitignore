@@ -1,0 +1,36 @@
+Set-Content -Path ".gitignore" -Value @'
+# Ignore system files
+.DS_Store
+Thumbs.db
+*.log
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore dependencies
+node_modules/
+package-lock.json
+
+# Ignore build artifacts
+dist/
+coverage/
+
+# Ignore environment variables
+.env
+.env.local
+
+# Ignore specific assets
+src/assets/*.jpg
+src/assets/*.png
+
+# Ignore parent directories
+../
+../../
+../../../
+../../../../
+../../../../../
+../../../../../../
+'@
