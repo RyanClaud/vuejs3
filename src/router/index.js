@@ -10,6 +10,8 @@ import HelmetsView from '@/components/HelmetsView.vue'
 import AnalyticsView from '@/components/AnalyticsView.vue'
 import SettingsView from '@/components/SettingsView.vue'
 
+const base = import.meta.env.BASE_URL || '/vuejs3/'
+
 const routes = [
   { 
     path: '/',
@@ -70,7 +72,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/vuejs3/' : '/'),
+  history: createWebHistory(base),
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
