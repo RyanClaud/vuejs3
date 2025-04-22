@@ -11,26 +11,74 @@ import AnalyticsView from '@/components/AnalyticsView.vue'
 import SettingsView from '@/components/SettingsView.vue'
 
 const routes = [
-  { path: '/', component: HomeView },
-  { path: '/login', component: LoginView },
-  { path: '/register', component: RegisterView },
+  { 
+    path: '/',
+    name: 'home',
+    component: HomeView 
+  },
+  { 
+    path: '/login',
+    name: 'login',
+    component: LoginView 
+  },
+  { 
+    path: '/register',
+    name: 'register',
+    component: RegisterView 
+  },
   {
     path: '/dashboard',
+    name: 'dashboard',
     component: DashboardView,
     children: [
-      { path: '', component: AlertsView }, // Default child route
-      { path: 'alerts', component: AlertsView },
-      { path: 'users', component: UsersView },
-      { path: 'helmets', component: HelmetsView },
-      { path: 'analytics', component: AnalyticsView },
-      { path: 'settings', component: SettingsView },
+      { 
+        path: '',
+        name: 'alerts',
+        component: AlertsView 
+      },
+      { 
+        path: 'alerts',
+        name: 'alerts-full',
+        component: AlertsView 
+      },
+      { 
+        path: 'users',
+        name: 'users',
+        component: UsersView 
+      },
+      { 
+        path: 'helmets',
+        name: 'helmets',
+        component: HelmetsView 
+      },
+      { 
+        path: 'analytics',
+        name: 'analytics',
+        component: AnalyticsView 
+      },
+      { 
+        path: 'settings',
+        name: 'settings',
+        component: SettingsView 
+      },
     ],
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.NODE_ENV === 'production' ? '/vuejs3/' : '/'),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  }
 })
 
 export default router

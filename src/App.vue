@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
+  mounted() {
+    // Force a re-render if we came from a redirect
+    const redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect !== location.href) {
+      this.$router.replace(redirect.substring(location.origin.length));
+    }
+  }
 }
 </script>
 
@@ -25,5 +35,6 @@ body {
 
 #app {
   height: 100vh;
+  width: 100%;
 }
 </style>
